@@ -1,0 +1,2 @@
+# HellsCookbook
+Game for tbolympiad
