@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashDuration = 0.2f;
 
-    [Header("Camera Settings")]
+    [Header("Camera Settings")]    
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private float cameraVerticalLimit = 80f;
 
