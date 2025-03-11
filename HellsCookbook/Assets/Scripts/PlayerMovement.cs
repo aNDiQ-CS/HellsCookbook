@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using System.Collections;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]    
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private float cameraVerticalLimit = 80f;
+    [SerializeField] private float cameraSprintNoise = 1.5f;
+    [SerializeField] private float cameraJumpNoise = 3f;
 
     [Header("Slide Settings")]
     [SerializeField] private float slideSpeed = 15f;    
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Bunnyhop Settings")]
     [SerializeField] private float bunnyHopMultiplier = 1.2f;
-    [SerializeField] private float airControl = 0.5f;
+    [SerializeField] private float airControl = 0.5f;    
 
     [Header("WallJump Settings")]
     [SerializeField] private float wallCheckDistance = 0.6f;    
@@ -100,6 +103,7 @@ public class PlayerController : MonoBehaviour
                 savedVelocity = horizontalMove * bunnyHopMultiplier;
                 velocity.y = jumpForce;
                 isJumping = true;
+                StartCoroutine(JumpCameraShake());
             }
         }
         else
@@ -115,6 +119,14 @@ public class PlayerController : MonoBehaviour
         Vector3 finalMove = horizontalMove + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
     }
+
+    private IEnumerator JumpCameraShake()
+    {
+        cameraNoise.m_AmplitudeGain = cameraJumpNoise;
+        yield return new WaitForSeconds(0.1f);
+        cameraNoise.m_AmplitudeGain = 0;
+    }
+
     private void HandleCamera()
     {
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -126,7 +138,10 @@ public class PlayerController : MonoBehaviour
         virtualCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.Rotate(0, mouseX, 0);
         
-        cameraNoise.m_AmplitudeGain = Input.GetKey(KeyCode.LeftShift) ? 0.5f : 0f;
+        if (!isJumping)
+        {
+            cameraNoise.m_AmplitudeGain = Input.GetKey(KeyCode.LeftShift) ? cameraSprintNoise : 0f;
+        }        
     }
 
     private void HandleDash()
@@ -228,16 +243,22 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         bool wallDetected = false;
         
+        // TODO: Заменить на checkSphere
         Vector3[] directions = new Vector3[]
         {
             transform.forward,
             -transform.forward,
             transform.right,
-            -transform.right
+            -transform.right,
+            new Vector3(transform.forward.x, 0, transform.forward.z),
+            new Vector3(-transform.forward.x, 0, transform.forward.z),
+            new Vector3(transform.forward.x, 0, -transform.forward.z),
+            new Vector3(-transform.forward.x, 0, -transform.forward.z),
         };
 
         foreach (Vector3 dir in directions)
         {
+            Debug.Log(dir);
             if (Physics.Raycast(transform.position, dir, out hit, wallCheckDistance, wallMask))
             {
                 wallNormal = hit.normal;
@@ -261,6 +282,7 @@ public class PlayerController : MonoBehaviour
         velocity.y = wallJumpVerticalForce;
         velocity += jumpDirection * wallJumpHorizontalForce;
 
+        StartCoroutine(JumpCameraShake());
         StartCoroutine(ResetWallJump());
     }
 
