@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -402,16 +402,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66dc1387dcc908c40a79b84bdfff92c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPrefabs:
-  - {fileID: 919132149155446097, guid: 9e4bb9ed9515372409282472f2aa82ad, type: 3}
-  - {fileID: 919132149155446097, guid: e040cdb4971bd804ebf5aa00fbc6de85, type: 3}
-  corridorPrefabs:
-  - {fileID: 919132149155446097, guid: b42f2284c5c85c640b0244d9fa2e221b, type: 3}
-  startRoomPrefab: {fileID: 919132149155446097, guid: 9e4bb9ed9515372409282472f2aa82ad, type: 3}
-  endRoomPrefab: {fileID: 919132149155446097, guid: 9e4bb9ed9515372409282472f2aa82ad, type: 3}
-  minRooms: 5
-  maxRooms: 10
-  roomSpacing: {x: 64, y: 64}
+  gridSize: 50
+  maxRooms: 30
+  tileSize: 64
+  corridorLength: 16
+  roomSet:
+    roomPrefabs:
+    - {fileID: 919132149155446097, guid: 9e4bb9ed9515372409282472f2aa82ad, type: 3}
+    - {fileID: 919132149155446097, guid: e040cdb4971bd804ebf5aa00fbc6de85, type: 3}
+    corridorPrefabs:
+    - {fileID: 919132149155446097, guid: b42f2284c5c85c640b0244d9fa2e221b, type: 3}
+  startRoomPrefab: {fileID: 919132149155446097, guid: 368a1bc24f13fd04fbc466d499eb7f7a, type: 3}
+  bossRoomPrefab: {fileID: 919132149155446097, guid: 368a1bc24f13fd04fbc466d499eb7f7a, type: 3}
 --- !u!4 &1722092412
 Transform:
   m_ObjectHideFlags: 0
