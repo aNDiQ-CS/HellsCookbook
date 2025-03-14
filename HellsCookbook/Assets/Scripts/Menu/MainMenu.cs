@@ -11,6 +11,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject aboutPanel;
     [SerializeField] private GameObject creditsPanel;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void Update()
     {
         directionalLight.Rotate(lightSpeed * Time.deltaTime, 0, 0);

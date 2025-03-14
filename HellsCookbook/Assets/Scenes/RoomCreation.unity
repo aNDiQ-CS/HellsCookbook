@@ -1560,7 +1560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2558187218747827099, guid: a41a0f7abb217ea4f897b0a79175a9cb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3126989958891841900, guid: a41a0f7abb217ea4f897b0a79175a9cb, type: 3}
       propertyPath: m_Mesh
@@ -1606,6 +1606,10 @@ PrefabInstance:
     - target: {fileID: 1208166981320310766, guid: df0518157d5f59c4c862b52a6f045635, type: 3}
       propertyPath: m_Name
       value: RoomBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208166981320310766, guid: df0518157d5f59c4c862b52a6f045635, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2079313741913411620, guid: df0518157d5f59c4c862b52a6f045635, type: 3}
       propertyPath: m_Mesh
