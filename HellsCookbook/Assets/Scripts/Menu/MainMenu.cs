@@ -38,11 +38,8 @@ public class MainMenu : MonoBehaviour
     }
 
     public void ExitGame()
-    {
-        if (Application.isPlaying)
-        {
-            Application.Quit();
-        }
+    {        
+        Application.Quit();        
     }
 
     public void ClosePanel(GameObject panel)
